@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "admin")
@@ -15,9 +17,12 @@ public class Admin {
 	@Column(name = "id")
 	private int id;
 	
+	@NotNull()
+	@Size(min=1,message = "enter valid username")
 	@Column(name = "username")
 	private String userName;
 	
+	@Size(min=1,message = "enter valid username")
 	@Column(name = "password")
 	private String password;
 	public Admin() {

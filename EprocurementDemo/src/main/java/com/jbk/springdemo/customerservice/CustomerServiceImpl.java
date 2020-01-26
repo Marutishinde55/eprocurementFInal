@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jbk.springdemo.dao.CustomerDAO;
 import com.jbk.springdemo.entity.Customer;
+import com.jbk.springdemo.entity.User;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+	
 	@Autowired
 	private CustomerDAO customerDAO;
 	
@@ -53,14 +55,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public boolean checkuser(String userName, String password) {
+	public Customer checkuser(User user) {
 		
-		return customerDAO.checkuser(userName,password);
+		return customerDAO.checkuser(user);
 	}
 
 
 
 	@Override
+	@Transactional
 	public boolean checkAdmin(String userName, String password) {
 		// TODO Auto-generated method stub
 		return customerDAO.checkadmin(userName,password);

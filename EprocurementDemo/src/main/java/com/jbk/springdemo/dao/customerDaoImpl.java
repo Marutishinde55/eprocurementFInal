@@ -7,9 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.jbk.springdemo.entity.Customer;
+import com.jbk.springdemo.entity.User;
 
 @Repository
 public class customerDaoImpl implements CustomerDAO{
@@ -38,28 +39,29 @@ public class customerDaoImpl implements CustomerDAO{
 	public void deletecustomer(int theid) {
 	
 		Session session=sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
 		Query<Customer> thequery=session.createQuery("delete from Customer where id=:customerId");
 		thequery.setParameter("customerId", theid);
 		thequery.executeUpdate();
 	}
 	@Override
-	public boolean checkuser(String userName, String password) {
+	public Customer checkuser(User user) {
 		System.out.println("In Check login");
+		String username=user.getUserName();
+		String password=user.getPassword();
 		Session session = sessionFactory.openSession();
-		boolean userFound = false;
-		//Query using Hibernate Query Language
 		String SQL_QUERY =" from Customer as o where o.userName=:userName and o.password=:password";
+		@SuppressWarnings("rawtypes")
 		Query query = session.createQuery(SQL_QUERY);
-		query.setParameter("userName",userName);
+		query.setParameter("userName",username);
 		query.setParameter("password",password);
-		List list = query.list();
+		@SuppressWarnings("unchecked")
+		List<Customer> list = query.getResultList();
 
-		if ((list != null) && (list.size() > 0)) {
-			userFound= true;
-		}
+		
 
 		session.close();
-		return userFound;
+		return list.size()>0 ?list.get(0):null;
 		
 	}
 	@Override
@@ -68,9 +70,11 @@ public class customerDaoImpl implements CustomerDAO{
 		boolean AdminFound = false;
 		//Query using Hibernate Query Language
 		String SQL_QUERY =" from Admin as o where o.userName=:userName and o.password=:password";
+		@SuppressWarnings("rawtypes")
 		Query query = session.createQuery(SQL_QUERY);
 		query.setParameter("userName",userName);
 		query.setParameter("password",password);
+		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		if ((list != null) && (list.size() > 0)) {
 			AdminFound= true;
@@ -79,6 +83,7 @@ public class customerDaoImpl implements CustomerDAO{
 		return AdminFound;
 		
 	}
+	
 
 	
 

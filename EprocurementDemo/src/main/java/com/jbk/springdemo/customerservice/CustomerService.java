@@ -3,6 +3,7 @@ package com.jbk.springdemo.customerservice;
 import java.util.List;
 
 import com.jbk.springdemo.entity.Customer;
+import com.jbk.springdemo.entity.User;
 
 public interface CustomerService {
 	
@@ -14,8 +15,10 @@ public Customer getCustomers(int theid);
 
 public void delete(int theid);
 
-public boolean checkuser(String userName, String password);
-
 public boolean checkAdmin(String userName, String password);
+
+public Customer checkuser(User user);
+
+
 }
   

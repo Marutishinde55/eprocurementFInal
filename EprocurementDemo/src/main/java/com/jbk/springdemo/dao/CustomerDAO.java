@@ -3,8 +3,9 @@ package com.jbk.springdemo.dao;
 import java.util.List;
 
 import com.jbk.springdemo.entity.Customer;
+import com.jbk.springdemo.entity.User;
 
-public interface CustomerDAO {
+public interface CustomerDAO  {
 
 	
 	
@@ -16,9 +17,10 @@ public interface CustomerDAO {
 
 	public void deletecustomer(int theid);
 
-	public boolean checkuser(String userName, String password);
-
+	
 	public boolean checkadmin(String userName, String password);
+
+	public Customer checkuser(User user);
 
 	
 
