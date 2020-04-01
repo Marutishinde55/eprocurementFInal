@@ -16,7 +16,7 @@ public class Admin {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
+	//helllo
 	@NotNull()
 	@Size(min=1,message = "enter valid username")
 	@Column(name = "username")
